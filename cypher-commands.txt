@@ -1,0 +1,108 @@
+** CREATE TEXT ADJACENCY GRAPHS
+
+WITH split(tolower("Corporate Governance Executive Officers Directors Apple 146 s Board consists have have gained including have have have bring Board Board Nominating Corporate Governance Committee 147 Nominating Committee 148 believe provide Apple engage address Apple 146 evolving represent Apple 146 Nominating Committee are recommended Board identified retained assist identifying evaluating evaluating Board Nominating Committee exercise demonstrated including Board Nominating Committee is committed seeking include Board are chosen Nominating Committee recommended evaluates using recommended Board 2015 Board adopted implement 20 owning three Apple representing 3 nominate include Apple 146 constituting 20 Apple 146 s Board provided satisfy December 2016 Board adopted enhance make nominate 149 Apple requires nominate recall hold is deemed continue has recall five 146 149 Apple increased limiting is reduced Apple reduces was nominated two is supported Board 149 re-nominate received 149 Apple has extended nominating provide Apple ten five Apple Inc. 2017 Proxy Statement 13 Table Contents 149 Apple has narrowed 146 arising 146 Apple provided Apple 149 Apple has limited Board interpret Director Nominees describe led Board Nominating Committee determine is nominate eight serves Board 147 Corporate Governance Executive Officers 151 Directors 148 refer Apple Inc. 2017 Proxy Statement 14 Table Contents Art Levinson 66 Director 2000 Chairman Board Audit Committee Art Levinson has served Chief Executive Officer Calico focused aging September 2013 Dr. Levinson served Chief Executive Officer Genentech Inc. July 1995 April 2009 served Genentech 146 Chairman September 1999 September 2014 Dr. Levinson brings Board including Public Company Directorships Five Amyris Inc. F. Hoffman-La Roche Ltd Selected Directorships Memberships Board Directors Broad Institute Harvard MIT Board Scientific Consultants Memorial Sloan Kettering Cancer Center Industrial Advisory Board California Institute Quantitative Biomedical Research Advisory Council Lewis-Sigler Institute Integrative Genomics Advisory Council Princeton University Department Molecular Biology Tim Cook 56 Director 2011 Chief Executive Officer Tim Cook has been Apple 146 Chief Executive Officer August 2011 was Apple 146 Chief Operating Officer October 2005 Mr. Cook joined Apple March 1998 served Executive Vice President Worldwide 2002 2005 2000 2002 Mr. Cook served Senior Vice President Worldwide Operations Service Support 1998 2000 Mr. Cook served Senior Vice President Worldwide Operations Mr. Cook brings Board including Current Public Company Directorships NIKE Inc Selected Directorships Memberships Board Directors National Football Foundation College Hall Fame Inc. Board Trustees Duke University Board Directors Robert F. Kennedy Center Justice Human Rights Apple Inc. 2017 Proxy Statement 15 Table Contents James Bell 68 Director 2015 Audit Committee James Bell is Executive Vice President Corporate President Chief Financial Officer Boeing Company Mr. Bell served Boeing 146 CFO 2008 2012 having served Executive Vice President Finance Chief Financial Officer 2003 2008 Senior Vice President Finance Corporate Controller 2000 2003 1992 2000 Mr. Bell held increasing Boeing Mr. Bell brings Board Current Public Company Directorships Dow Chemical Company JPMorgan Chase amp Co. CDW Corporation Selected Directorships Memberships Board Trustees Rush University Medical Center Al Gore 68 Director 2003 Compensation Committee Nominating Committee Al Gore has served Chairman Generation Investment Management 2004 Kleiner Perkins Caufield 2007 Mr. Gore is Chairman Climate Reality Project Mr. Gore was elected U.S. House four U.S. Senate two served two Vice President United Mr. Gore brings Board Apple Inc. 2017 Proxy Statement 16 Table Contents Bob Iger 66 Director 2011 Compensation Committee Nominating Committee Chair Bob Iger has served Chairman Chief Executive Officer Walt Disney Company March 2012 served President Chief Executive Officer Disney October 2005 having served President Chief Operating Officer January 2000 President Walt Disney International Chairman ABC Group 1999 2000 1974 1998 Mr. Iger held increasing ABC Inc. Capital Cities/ABC Inc Mr. Iger brings Board including Current Public Company Directorships Walt Disney Company Selected Directorships Memberships Board Directors National September 11 Memorial amp Museum Vice Chairman U.S.-China Business Council Co-Chairman Partnership New Economy Member American Academy Arts Member President 146 Export Council Board Directors Bloomberg Philanthropies Andrea Jung 58 Director 2008 Compensation Committee Chair Nominating Committee Andrea Jung has served President Chief Executive Officer Grameen America LLC April 2014 serves Board Directors Ms. Jung served Executive Chairman Avon Products Inc. April 2012 December 2012 Chairman Board Directors Avon September 2001 April 2012 Ms. Jung served Chief Executive Officer Avon November 1999 April 2012 served Board Directors Avon January 1998 December 2012 Ms. Jung brings Board including Current Public Company Directorships Daimler AG General Electric Company Former Public Company Directorships Five Avon Inc. Apple Inc. 2017 Proxy Statement 17 Table Contents Ron Sugar 68 Director 2010 Audit Committee Chair Ron Sugar is Chairman Board Chief Executive Officer Northrop Grumman Corporation Dr. Sugar served 2003 2010 served President Chief Operating Officer 2001 2003 Northrop Grumman held Litton TRW Inc. served Chief Financial Officer Dr. Sugar is including Ares Management LLC Bain Temasek Americas Advisory Panel G100 Network World 50 Dr. Sugar brings Board Current Public Company Directorships Air Lease Corporation Amgen Inc. Chevron Corporation Selected Directorships Memberships Member National Academy Engineering Board Trustees University Southern California Board Directors Los Angeles Philharmonic Association Board Trustees Boys Girls Clubs America Sue Wagner 55 Director 2014 Audit Committee Sue Wagner is BlackRock Inc. Ms. Wagner served BlackRock 146 Vice Chairman January 2006 July 2012 served BlackRock 146 Global Executive Committee Global Operating Committee BlackRock Ms. Wagner served BlackRock 146 Chief Operating Officer Head Corporate Strategy led Ms. Wagner brings Board including operating Current Public Company Directorships BlackRock Inc. Swiss Re Selected Directorships Memberships Board Directors Color Genomics Inc. Board Trustees Wellesley College Board Trustees Hackley School Apple Inc. 2017 Proxy Statement 18"), " ") AS text
+UNWIND range(0,size(text)-2) AS i
+MERGE(w1:Word {name :text[i]})
+ON CREATE SET w1.count = 1 ON MATCH SET w1.count = w1.count + 1
+MERGE(w2:Word {name :text[i+1]})
+ON CREATE SET w2.count = 1 ON MATCH SET w2.count = w2.count + 1
+MERGE(w1)-[r:NEXT]->(w2)
+ON CREATE SET r.count = 1
+ON MATCH SET r.count = r.count + 1;
+
+
+
+
+
+WITH split(tolower("Corporate Governance Executive Officers Directors Apple Board Nominating Corporate Governance Committee Nominating Committee Apple Nominating Committee Board Nominating Committee Board Nominating Committee Board Nominating Committee Board Apple Board December Board Apple Board Apple Inc. Proxy Statement Table Contents Apple Board Director Nominees Board Nominating Committee Board Corporate Governance Executive Officers Directors Apple Inc. Proxy Statement Table Contents Levinson Director Chairman Board Audit Committee Levinson Chief Executive Officer Calico September Levinson Chief Executive Officer Genentech Inc. July April Genentech Chairman September Levinson Board Public Company Directorships Amyris Inc. Hoffman-La Roche Directorships Memberships Board Directors Broad Institute Harvard Board Scientific Consultants Memorial Sloan Kettering Cancer Center Industrial Advisory Board California Institute Quantitative Biomedical Research Advisory Council Lewis-Sigler Institute Integrative Genomics Advisory Council Princeton University Department Molecular Biology Cook Director Chief Executive Officer Cook Apple Chief Executive Officer August Apple Chief Operating Officer October Cook Apple March Executive Vice President Worldwide Cook Senior Vice President Worldwide Operations Service Support Cook Senior Vice President Worldwide Operations Cook Board Current Public Company Directorships NIKE Directorships Memberships Board Directors National Football Foundation College Hall Fame Inc. Board Trustees Duke University Board Directors Robert Kennedy Center Justice Human Rights Apple Inc. Proxy Statement Table Contents James Bell Director Audit Committee James Bell Executive Vice President Corporate President Chief Financial Officer Boeing Company Bell Boeing Executive Vice President Finance Chief Financial Officer Senior Vice President Finance Corporate Controller Bell Boeing Bell Board Current Public Company Directorships Chemical Company JPMorgan Chase Corporation Selected Directorships Memberships Board Trustees Rush University Medical Center Gore Director Compensation Committee Nominating Committee Gore Chairman Generation Investment Management Kleiner Perkins Caufield Gore Chairman Climate Reality Project Gore U.S. House U.S. Senate Vice President United Gore Board Apple Inc. Proxy Statement Table Contents Iger Director Compensation Committee Nominating Committee Chair Iger Chairman Chief Executive Officer Walt Disney Company March President Chief Executive Officer Disney October President Chief Operating Officer January President Walt Disney International Chairman Group Iger Inc. Capital Cities/ABC Iger Board Current Public Company Directorships Walt Disney Company Selected Directorships Memberships Board Directors National September Memorial Museum Vice Chairman U.S.-China Business Council Co-Chairman Partnership Economy Member American Academy Arts Member President Export Council Board Directors Bloomberg Philanthropies Andrea Jung Director Compensation Committee Chair Nominating Committee Andrea Jung President Chief Executive Officer Grameen America April Board Directors Jung Executive Chairman Avon Products Inc. April December Chairman Board Directors Avon September April Jung Chief Executive Officer Avon November April Board Directors Avon January December Jung Board Current Public Company Directorships Daimler General Electric Company Former Public Company Directorships Avon Inc. Apple Inc. Proxy Statement Table Contents Sugar Director Audit Committee Chair Sugar Chairman Board Chief Executive Officer Northrop Grumman Corporation Sugar President Chief Operating Officer Northrop Grumman Litton Inc. Chief Financial Officer Sugar Ares Management Bain Temasek Americas Advisory Panel G100 Network World Sugar Board Current Public Company Directorships Lease Corporation Amgen Inc. Chevron Corporation Selected Directorships Memberships Member National Academy Engineering Board Trustees University Southern California Board Directors Angeles Philharmonic Association Board Trustees Boys Girls Clubs America Wagner Director Audit Committee Wagner BlackRock Inc. Wagner BlackRock Vice Chairman January July BlackRock Global Executive Committee Global Operating Committee BlackRock Wagner BlackRock Chief Operating Officer Head Corporate Strategy Wagner Board Current Public Company Directorships BlackRock Inc. Swiss Selected Directorships Memberships Board Directors Color Genomics Inc. Board Trustees Wellesley College Board Trustees Hackley School Apple Inc. Proxy Statement"), " ") AS text
+UNWIND range(0,size(text)-2) AS i
+MERGE(w1:Word {name :text[i]})
+ON CREATE SET w1.count = 1 ON MATCH SET w1.count = w1.count + 1
+MERGE(w2:Word {name :text[i+1]})
+ON CREATE SET w2.count = 1 ON MATCH SET w2.count = w2.count + 1
+MERGE(w1)-[r:NEXT]->(w2)
+ON CREATE SET r.count = 1
+ON MATCH SET r.count = r.count + 1;
+
+** CREATE DOCCUMENT ENTITY
+CREATE (Apple14A:Document{title:"Apple Inc. Notice of 2017 Annual Meeing of Shareholders and Proxy Statement", type:"14A", date:"2017-02-28", source:"SEC EDGAR"})
+
+
+
+
+
+
+
+
+
+
+** WORD FREQUENCY
+MATCH (w:Word)
+RETURN w.name AS word, w.count AS word_count
+ORDER BY w.count DESC LIMIT 5;
+
+** WORD PAIR FREQUENCIES
+MATCH (w1:Word)-[r:NEXT]->(w2:Word)
+RETURN [w1.name, w2.name] AS word_pair, r.count AS count
+ORDER BY count DESC LIMIT 100;
+
+
+** MATCH WORDS
+MATCH (tim:Word {name:"tim"}) RETURN tim
+
+** MATCH ALL WORDS AFTER
+MATCH (cook:Word {name:"cook"})-[:NEXT]->(m) RETURN m
+
+** MATCH WORDS WITHIN 4 HOPS AWAY FROM XX
+MATCH (director:Word {name:"director"})-[*1..4]-(name)
+RETURN DISTINCT name
+
+
+** MATCH WORDS THAT ARE ONE HOP AWAY FROM DIRECTOR (contains all directors names)
+MATCH (director:Word {name:"director"})-[*1]-(name)
+RETURN DISTINCT name,director
+;
+
+
+
+** Add label to group
+MATCH (cook:Word)
+WHERE cook.name = "cook"
+SET cook :Person;
+
+MATCH (bell:Word)
+WHERE bell.name = "bell"
+SET bell :Person;
+
+MATCH (levinson:Word)
+WHERE levinson.name = "levinson"
+SET levinson :Person;
+
+MATCH (jung:Word)
+WHERE jung.name = "jung"
+SET jung :Person;
+
+MATCH (gore:Word)
+WHERE gore.name = "gore"
+SET gore :Person;
+
+MATCH (sugar:Word)
+WHERE sugar.name = "sugar"
+SET sugar :Person;
+
+MATCH (iger:Word)
+WHERE iger.name = "iger"
+SET iger :Person;
+
+MATCH (wagner:Word)
+WHERE wagner.name = "wagner"
+SET wagner :Person;
+
+
+** MATCH ALL PERSON LABELS NEXT TO WORD DIRECTOR
+MATCH (director:Word {name:"director"})-[*1]-(name:Person)
+RETURN DISTINCT name,director
+
+** MATCH ALL PERSON LABELS WITHIN 2 HOPS OF WORD DIRECTOR
+MATCH (director:Word {name:"director"})-[*1..2]-(name:Person) RETURN DISTINCT name,director
+

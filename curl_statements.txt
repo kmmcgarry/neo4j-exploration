@@ -1,0 +1,6 @@
+
+# NoSql mapping
+curl -XGET 'https://admin:VHEIBOYVLZCVDAMU@portal-ssl965-1.bmix-dal-yp-732952d6-715c-4a15-8d12-9fb792934c59.mcgark9-nationwide-com.composedb.com:17338/_mapping?pretty' 
+
+# matching all words
+curl -XGET 'https://admin:VHEIBOYVLZCVDAMU@portal-ssl965-1.bmix-dal-yp-732952d6-715c-4a15-8d12-9fb792934c59.mcgark9-nationwide-com.composedb.com:17338/examples/words/_search?pretty' -d '{"query":{"match_all":{}}}' 
